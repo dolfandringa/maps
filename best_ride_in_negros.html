@@ -2,20 +2,26 @@
   <head>
     <title>The Best Ride In Negros</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
       crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.5.1/gpx.min.js"></script>
   </head>
   <body>
-    <div style="width: 600px; height: 400px;" tabindex="700" id="map" class="map"></div>
+    <div style="width: 100%; height: 100%;" tabindex="700" id="map" class="map"></div>
     <script type="text/javascript">
       $(document).ready(function() {
-        var map = L.map('map').setView([51.505, -0.09], 13);
+        var map = L.map('map');
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var gpx = 'the_best_ride_in_negros_oriental.gpx'; // URL to your GPX file or the GPX itself
+        new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+          map.fitBounds(e.target.getBounds());
         }).addTo(map);
       });
     </script>
