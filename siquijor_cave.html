@@ -21,7 +21,7 @@
         });
         const ocm = L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=de06b283af4e4dec8b981b7a481fe2ab', {
                 attribution: 'Maps &copy; <a href="http://www.thunderforest.com/">Thunderforest</a> Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        });
+        }).addTo(map);
 
         var gpx = 'siquijor_cave.gpx'; // URL to your GPX file or the GPX itself
         new L.GPX(gpx, {async: true}).on('loaded', function(e) {
